@@ -29,7 +29,7 @@ has out_dir	=> (
 has file_types => (
     is          => 'ro',
     isa         => 'ArrayRef[Str]',
-    reader      => 'get_file_types',
+    reader      => 'get_regexes',
     required    => 1,
 );
 
@@ -42,8 +42,8 @@ sub BUILD{
 sub add_page{
 	my ($self, $url, $depth) = @_;
     if($depth <= $self->get_max_depth()){
-        my $page = new Page(url => $url, depth => $depth);   
         Debug::TRACE("Controller: Fetching $url");     
+        my $page = new Page(url => $url, depth => $depth);   
     }
 }
 1;

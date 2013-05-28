@@ -18,12 +18,12 @@ has 'depth'     => (
     documentation   => qq{Number of levels to traverse},
 );
 
-has 'filetype'  => (
+has 'regex'  => (
     is              => 'rw', 
     isa             => 'ArrayRef', 
     required        => 1, 
     default         => sub { [''] },
-    documentation   => qq{Files to download (This option can occur multiple times)},
+    documentation   => qq{Regexes to find (This can occur multiple times)},
 );
 
 has 'outdir'    => (

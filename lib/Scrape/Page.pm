@@ -4,6 +4,7 @@ package Page;
 use Moose;
 use LWP::Simple;
 use Scrape::Controller;
+use Data::Dumper;
 require LWP::UserAgent;
 
 
@@ -23,7 +24,7 @@ has url			=> (
 	required	=> 1,
 );
 
-# user agent
+# User-agent
 has ua	=> 	(is => 'rw');
 has controller => (is => 'rw');
 
@@ -36,6 +37,25 @@ sub BUILD {
 	$self->ua->env_proxy;
 	$self->ua->agent('Mozilla/5.0');
 	$self->controller(Controller->instance());
+	$self->process_page();
+}
+
+sub process_page{
+	my $self = shift;
+	my $response = $self->_get_text($self->get_url);
+	$self->_find_matches($response, $self->controller->get_regexes) if defined $response;
+	
+}
+
+# Given a string and file extension to match, finds all instances of it
+sub _find_matches{
+	my ($self, $text, $regexes) = @_;
+	my @matches;
+	foreach my $regex(@$regexes){
+		my @match = ($text =~ /$regex/g);
+		@matches = (@matches, @match);
+	}
+	return @matches;
 }
 
 # Input: url
@@ -46,6 +66,7 @@ sub _get_text {
 	if($response->is_success){
 		return $response->decoded_content;
 	}else{
+		Debug::WARN("Page: Request to $url failed due to error: ", $response->status_line);
 		return;
 	}
 }

@@ -13,7 +13,7 @@ sub main{
 	my $options = Options->new_with_options(); #contains all options in hash-ref
 	my $pc = Controller->initialize(
 					url			=> $options->{'url'},
-					file_types 	=> $options->{'filetype'}, 
+					file_types 	=> $options->{'regex'}, 
 					out_dir		=> $options->{'outdir'},
 					max_depth	=> $options->{'depth'},
 				);
