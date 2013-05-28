@@ -1,0 +1,5 @@
+Module names are MixedCaseNoUnderscores
+Constants are UPPERCASE_WITH_UNDERSCORES
+Package wide variables are Mixed_Case_With_Underscores
+Function variables are lowercase_with_underscores
+Also, function and method names are also lowercase_with_underscore
