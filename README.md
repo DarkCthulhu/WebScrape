@@ -10,3 +10,7 @@ Upgrade to the newest version of:
    5. Number::Bytes::Human
    6. MooseX::Singleton
    7. MooseX::Getopt::Usage
+
+
+#### Sample Usage:
+./scrape.pl --url "http://lwn.net/" --regex "\".*?jpg\"" --outdir "."
